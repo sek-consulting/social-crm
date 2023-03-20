@@ -8,7 +8,7 @@ export default async function IndexPage() {
   return (
     <div>
       <div className="flex h-screen w-screen flex-col items-center justify-center">
-        <h1>HELLO WORLD!</h1>
+        <h1>HELLO DEV!</h1>
       </div>
     </div>
   )
