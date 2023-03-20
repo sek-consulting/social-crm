@@ -1,7 +1,8 @@
 import { Metadata } from "next"
 
+import { Card } from "~/components/layout/card"
+import { Flex } from "~/components/layout/flex"
 import { LoginForm } from "~/components/login-form"
-import { Card } from "~/components/ui/card"
 
 export const metadata: Metadata = {
   title: "Login",
@@ -10,10 +11,10 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <main className="flex h-screen items-center justify-center">
+    <Flex className="h-screen" justifyContent="center" alignItems="center">
       <Card>
         <LoginForm />
       </Card>
-    </main>
+    </Flex>
   )
 }
