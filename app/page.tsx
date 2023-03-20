@@ -1,13 +1,14 @@
-"use client"
+import { getCurrentUser } from "~/lib/session"
 
-import { signOut } from "next-auth/react"
+export default async function IndexPage() {
+  // user can only be received in async server components
+  const user = await getCurrentUser()
+  console.log(user)
 
-export default function IndexPage() {
   return (
     <div>
       <div className="flex h-screen w-screen flex-col items-center justify-center">
-        <h1>HELLO WORLD</h1>
-        <button onClick={() => signOut()}>logout</button>
+        <h1>HELLO WORLD!</h1>
       </div>
     </div>
   )
