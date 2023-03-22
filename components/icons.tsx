@@ -1,9 +1,34 @@
-import { Loader2, LucideProps, X, type Icon as LucideIcon } from "lucide-react"
+import {
+  ArrowDown,
+  ArrowDownRight,
+  ArrowRight,
+  ArrowUp,
+  ArrowUpRight,
+  ChevronFirst,
+  ChevronLast,
+  ChevronLeft,
+  ChevronRight,
+  Download,
+  Loader2,
+  LucideProps,
+  X,
+  type Icon as LucideIcon
+} from "lucide-react"
 
 export type Icon = LucideIcon
 
 export const Icons = {
+  arrowUp: ArrowUp,
+  arrowUpRight: ArrowUpRight,
+  arrowRight: ArrowRight,
+  arrowDownRight: ArrowDownRight,
+  arrowDown: ArrowDown,
+  first: ChevronFirst,
+  back: ChevronLeft,
+  next: ChevronRight,
+  last: ChevronLast,
   close: X,
+  download: Download,
   spinner: Loader2,
   gitHub: ({ ...props }: LucideProps) => (
     <svg

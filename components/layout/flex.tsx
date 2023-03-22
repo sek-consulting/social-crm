@@ -13,8 +13,8 @@ const Flex = React.forwardRef<HTMLDivElement, FlexProps>(
   (
     {
       flexDirection = "row",
-      justifyContent = "start",
-      alignItems = "stretch",
+      justifyContent = "between",
+      alignItems = "center",
       className,
       children,
       ...props
@@ -23,7 +23,6 @@ const Flex = React.forwardRef<HTMLDivElement, FlexProps>(
   ) => {
     return (
       <div
-        ref={ref}
         className={cn(
           "flex",
           "flex-" + flexDirection,
@@ -31,6 +30,7 @@ const Flex = React.forwardRef<HTMLDivElement, FlexProps>(
           "items-" + alignItems,
           className
         )}
+        ref={ref}
         {...props}
       >
         {children}

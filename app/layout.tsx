@@ -17,13 +17,7 @@ const fontSans = Inter({
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={cn(
-        "bg-zinc-50 text-zinc-900 antialiased dark:bg-zinc-800 dark:text-zinc-50",
-        fontSans.variable
-      )}
-    >
+    <html lang="en" className={cn("bg-zinc-50 text-zinc-900 antialiased", fontSans.variable)}>
       <body className="min-h-screen">
         {children}
         <Toaster />
