@@ -2,7 +2,6 @@ import * as React from "react"
 
 import { cn } from "~/lib/utils"
 
-// https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 export interface FlexProps extends React.HTMLAttributes<HTMLDivElement> {
   flexDirection?: "row" | "col" | "row-reverse" | "col-reverse"
   justifyContent?: "start" | "end" | "center" | "between" | "around" | "evenly"
