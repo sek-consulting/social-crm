@@ -1,7 +1,8 @@
 import { Metadata } from "next"
 
 import { Card } from "~/components/layout/card"
-import { LoginForm } from "~/components/login-form"
+
+import { LoginForm } from "./login-form"
 
 export const metadata: Metadata = {
   title: "Login",
