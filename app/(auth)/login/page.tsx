@@ -1,6 +1,6 @@
 import { Metadata } from "next"
 
-import { Card } from "~/components/layout/card"
+import { Card } from "~/components/ui/card"
 
 import { LoginForm } from "./login-form"
 

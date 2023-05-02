@@ -1,4 +1,4 @@
-import { Card } from "~/components/layout/card"
+import { Card } from "~/components/ui/card"
 
 import { ResetPasswordForm } from "./reset-form"
 

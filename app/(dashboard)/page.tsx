@@ -1,8 +1,7 @@
-import { BadgeDelta } from "~/components/badge-delta"
 import { ItemTable, type Item } from "~/components/item-table"
-import { Card } from "~/components/layout/card"
-import { Flex } from "~/components/layout/flex"
+import { Badge } from "~/components/ui/badge"
 import { Button } from "~/components/ui/button"
+import { Card, CardContent, CardHeader } from "~/components/ui/card"
 import { getCurrentUser } from "~/lib/session"
 
 export default async function IndexPage() {
@@ -24,22 +23,27 @@ export default async function IndexPage() {
   return (
     <div className="flex h-screen w-screen items-center justify-center">
       <div className="flex flex-col items-center space-y-4">
-        <Card>HELLO {user?.name}!</Card>
+        <Card className="p-4">HELLO {user?.name}!</Card>
         <Card className="w-64">
-          <Flex>
-            <p>Sales</p>
-            <BadgeDelta deltaType="moderateIncrease">+15 %</BadgeDelta>
-          </Flex>
-          <span className="text-3xl font-bold">$ 23,456</span>
+          <CardHeader>
+            <div className="flex justify-between">
+              <p>Sales</p>
+              <Badge variant={"default"}>+15 %</Badge>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <span className="text-3xl font-bold">$ 23,456</span>
+          </CardContent>
         </Card>
-        <Card className="flex flex-row gap-2">
+        <Card className="flex space-x-2 p-4">
           <Button>default</Button>
-          <Button variant="primary">primary</Button>
+          <Button variant="secondary">secondary</Button>
+          <Button variant="ghost">ghost</Button>
           <Button variant="destructive">destructive</Button>
           <Button variant="outline">outline</Button>
           <Button variant="link">link</Button>
         </Card>
-        <Card>
+        <Card className="p-4">
           <ItemTable data={dummyData()} />
         </Card>
       </div>

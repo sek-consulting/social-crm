@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google"
 
+import { QueryProvider } from "~/components/query-provider"
 import { Toaster } from "~/components/ui/toaster"
 import { cn } from "~/lib/utils"
 import "~/styles/globals.css"
@@ -11,8 +12,7 @@ export const metadata = {
 
 const fontSans = Inter({
   subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap"
+  variable: "--font-sans"
 })
 
 interface RootLayoutProps {
@@ -23,8 +23,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" className={cn("bg-zinc-50 text-zinc-900 antialiased", fontSans.variable)}>
       <body className="min-h-screen">
-        {children}
-        <Toaster />
+        <QueryProvider>
+          {children}
+          <Toaster />
+        </QueryProvider>
       </body>
     </html>
   )

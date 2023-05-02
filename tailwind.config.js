@@ -2,52 +2,73 @@ const { fontFamily } = require("tailwindcss/defaultTheme")
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
+  darkMode: ["class"],
+  content: ["app/**/*.{ts,tsx}", "components/**/*.{ts,tsx}"],
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px"
+      }
+    },
     extend: {
       colors: {
-        lightsky: {
-          // BMW M LIGHT BLUE
-          50: "#f2f9ff",
-          100: "#e6f3ff",
-          200: "#cde7ff",
-          300: "#b3dcff",
-          400: "#9ad0ff",
-          500: "#81c4ff",
-          600: "#679dcc",
-          700: "#4d7699",
-          800: "#344e66",
-          900: "#1a2733"
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))"
         },
-        yale: {
-          // BMW M DARK BLUE
-          50: "#e8eef4",
-          100: "#d0dee8",
-          200: "#a2bcd2",
-          300: "#739bbb",
-          400: "#4579a5",
-          500: "#16588e",
-          600: "#124672",
-          700: "#0d3555",
-          800: "#092339",
-          900: "#04121c"
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))"
         },
-        crimson: {
-          // BMW M RED
-          50: "#fde9ea",
-          100: "#fad3d5",
-          200: "#f5a7ab",
-          300: "#f17a82",
-          400: "#ec4e58",
-          500: "#e7222e",
-          600: "#b91b25",
-          700: "#8b141c",
-          800: "#5c0e12",
-          900: "#2e0709"
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))"
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))"
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))"
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))"
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))"
         }
+      },
+      borderRadius: {
+        lg: `var(--radius)`,
+        md: `calc(var(--radius) - 2px)`,
+        sm: "calc(var(--radius) - 4px)"
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans]
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: 0 },
+          to: { height: "var(--radix-accordion-content-height)" }
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: 0 }
+        }
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out"
       }
     }
   },
