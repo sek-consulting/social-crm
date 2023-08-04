@@ -46,7 +46,7 @@
     "solid-js": "^1.7.5",
     "solid-start": "^0.2.26",
     "tailwind-merge": "^1.12.0",
-    "undici": "5.22.0",
+    "undici": "5.22.1",
     "zod": "^3.21.4"
   },
   "engines": {
