@@ -44,7 +44,7 @@
     "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",
     "solid-js": "^1.7.5",
-    "solid-start": "^0.2.26",
+    "solid-start": "^0.3.1",
     "tailwind-merge": "^1.12.0",
     "undici": "5.22.0",
     "zod": "^3.21.4"
