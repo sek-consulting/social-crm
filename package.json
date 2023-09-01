@@ -31,7 +31,7 @@
     "@auth/core": "^0.5.1",
     "@fontsource/inter": "^4.5.15",
     "@kobalte/core": "^0.9.6",
-    "@modular-forms/solid": "^0.13.2",
+    "@modular-forms/solid": "^0.19.1",
     "@next-auth/prisma-adapter": "^1.0.6",
     "@prisma/client": "^4.14.1",
     "@prpc/solid": "^0.2.33",
