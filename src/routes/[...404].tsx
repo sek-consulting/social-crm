@@ -1,25 +1,19 @@
 import { A } from "@solidjs/router"
 
+import { IconMoodNeutral } from "~/components/icons"
+import { Button } from "~/components/ui/button"
+
 export default function NotFound() {
   return (
-    <main class="text-center mx-auto text-gray-700 p-4">
-      <h1 class="max-6-xs text-6xl text-sky-700 font-thin uppercase my-16">Not Found</h1>
-      <p class="mt-8">
-        Visit{" "}
-        <a href="https://solidjs.com" target="_blank" class="text-sky-600 hover:underline">
-          solidjs.com
-        </a>{" "}
-        to learn how to build Solid apps.
+    <main class="flex min-h-screen flex-col items-center justify-center gap-4 p-6 text-center">
+      <IconMoodNeutral class="size-32 md:size-48" />
+      <h1 class="text-4xl font-extrabold tracking-tighter md:text-6xl">Oops! Page not found.</h1>
+      <p class="text-muted-foreground">
+        The page you're looking for doesn't exist or has been moved.
       </p>
-      <p class="my-4">
-        <A href="/" class="text-sky-600 hover:underline">
-          Home
-        </A>
-        {" - "}
-        <A href="/about" class="text-sky-600 hover:underline">
-          About Page
-        </A>
-      </p>
+      <Button as={A} href="/">
+        Go back home
+      </Button>
     </main>
   )
 }

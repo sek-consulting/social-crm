@@ -1,5 +1,5 @@
 import type { ValidComponent } from "solid-js"
-import { splitProps } from "solid-js"
+import { mergeProps, splitProps } from "solid-js"
 
 import type { PolymorphicProps } from "@kobalte/core"
 import * as TextFieldPrimitive from "@kobalte/core/text-field"
@@ -7,12 +7,22 @@ import { cva } from "class-variance-authority"
 
 import { cn } from "~/lib/utils"
 
-const TextField = TextFieldPrimitive.Root
+type TextFieldRootProps<T extends ValidComponent = "div"> =
+  TextFieldPrimitive.TextFieldRootProps<T> & {
+    class?: string | undefined
+  }
+
+const TextField = <T extends ValidComponent = "div">(
+  props: PolymorphicProps<T, TextFieldRootProps<T>>
+) => {
+  const [local, others] = splitProps(props as TextFieldRootProps, ["class"])
+  return <TextFieldPrimitive.Root class={cn("flex flex-col gap-1", local.class)} {...others} />
+}
 
 type TextFieldInputProps<T extends ValidComponent = "input"> =
   TextFieldPrimitive.TextFieldInputProps<T> & {
     class?: string | undefined
-    type:
+    type?:
       | "button"
       | "checkbox"
       | "color"
@@ -38,8 +48,9 @@ type TextFieldInputProps<T extends ValidComponent = "input"> =
   }
 
 const TextFieldInput = <T extends ValidComponent = "input">(
-  props: PolymorphicProps<T, TextFieldInputProps<T>>
+  rawProps: PolymorphicProps<T, TextFieldInputProps<T>>
 ) => {
+  const props = mergeProps<TextFieldInputProps<T>[]>({ type: "text" }, rawProps)
   const [local, others] = splitProps(props as TextFieldInputProps, ["type", "class"])
   return (
     <TextFieldPrimitive.Input

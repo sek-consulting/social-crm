@@ -1,14 +1,16 @@
 import { Suspense } from "solid-js"
-
-import { Router } from "@solidjs/router"
-import { FileRoutes } from "@solidjs/start/router"
-
-import "./app.css"
-
 import { isServer } from "solid-js/web"
 
 import { ColorModeProvider, ColorModeScript, cookieStorageManagerSSR } from "@kobalte/core"
+import { Router } from "@solidjs/router"
+import { FileRoutes } from "@solidjs/start/router"
 import { getCookie } from "vinxi/http"
+
+import "@fontsource/inter/latin.css"
+import "./app.css"
+
+import { AppSidebar } from "~/components/app-sidebar"
+import { SidebarProvider, SidebarTrigger } from "~/components/ui/sidebar"
 
 function getServerCookies() {
   "use server"
@@ -24,7 +26,13 @@ export default function App() {
         <>
           <ColorModeScript storageType={storageManager.type} />
           <ColorModeProvider storageManager={storageManager}>
-            <Suspense>{props.children}</Suspense>
+            <SidebarProvider>
+              <AppSidebar />
+              <main>
+                <SidebarTrigger />
+                <Suspense>{props.children}</Suspense>
+              </main>
+            </SidebarProvider>
           </ColorModeProvider>
         </>
       )}
