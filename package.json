@@ -19,16 +19,16 @@
     "@node-rs/argon2": "^2.0.0",
     "@oslojs/crypto": "^1.0.1",
     "@oslojs/encoding": "^1.1.0",
-    "@solidjs/router": "^0.14.8",
-    "@solidjs/start": "^1.0.8",
+    "@solidjs/router": "^0.15.0",
+    "@solidjs/start": "^1.0.10",
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "drizzle-orm": "^0.34.1",
+    "drizzle-orm": "^0.36.0",
     "postcss": "^8.4.47",
-    "solid-js": "^1.9.2",
-    "tailwind-merge": "^2.5.3",
-    "tailwindcss": "^3.4.13",
+    "solid-js": "^1.9.3",
+    "tailwind-merge": "^2.5.4",
+    "tailwindcss": "^3.4.14",
     "tailwindcss-animate": "^1.0.7",
     "valibot": "^0.42.1",
     "vinxi": "^0.4.3"
@@ -37,17 +37,17 @@
     "node": ">=18"
   },
   "devDependencies": {
-    "@eslint/js": "^9.12.0",
+    "@eslint/js": "^9.14.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
     "@types/eslint__js": "^8.42.3",
-    "@typescript-eslint/parser": "^8.8.1",
-    "drizzle-kit": "^0.25.0",
-    "eslint": "^9.12.0",
+    "@typescript-eslint/parser": "^8.12.2",
+    "drizzle-kit": "^0.27.1",
+    "eslint": "^9.14.0",
     "eslint-plugin-solid": "^0.14.3",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",
-    "tsx": "^4.19.1",
+    "tsx": "^4.19.2",
     "typescript": "^5.6.3",
-    "typescript-eslint": "^8.8.1"
+    "typescript-eslint": "^8.12.2"
   }
 }
