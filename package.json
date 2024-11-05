@@ -9,13 +9,13 @@
     "lint:debug": "eslint ./src --debug",
     "lint:fix": "eslint ./src --fix",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
-    "db:studio": "drizzle-kit studio"
+    "db:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
     "@fontsource/inter": "^5.1.0",
     "@kobalte/core": "^0.13.7",
     "@libsql/client": "^0.14.0",
+    "@modular-forms/solid": "^0.24.1",
     "@node-rs/argon2": "^2.0.0",
     "@oslojs/crypto": "^1.0.1",
     "@oslojs/encoding": "^1.1.0",
@@ -30,7 +30,7 @@
     "tailwind-merge": "^2.5.4",
     "tailwindcss": "^3.4.14",
     "tailwindcss-animate": "^1.0.7",
-    "valibot": "^0.42.1",
+    "valibot": "1.0.0-beta.3",
     "vinxi": "^0.4.3"
   },
   "engines": {
@@ -40,7 +40,7 @@
     "@eslint/js": "^9.14.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
     "@types/eslint__js": "^8.42.3",
-    "@typescript-eslint/parser": "^8.12.2",
+    "@typescript-eslint/parser": "^8.13.0",
     "drizzle-kit": "^0.27.1",
     "eslint": "^9.14.0",
     "eslint-plugin-solid": "^0.14.3",
@@ -48,6 +48,6 @@
     "prettier-plugin-tailwindcss": "^0.6.8",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3",
-    "typescript-eslint": "^8.12.2"
+    "typescript-eslint": "^8.13.0"
   }
 }

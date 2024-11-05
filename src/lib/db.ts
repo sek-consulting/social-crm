@@ -9,25 +9,28 @@ const client = createClient({
   url: serverEnv.TURSO_DATABASE_URL,
   authToken: serverEnv.TURSO_AUTH_TOKEN
 })
-export const db = drizzle(client, { casing: "snake_case" })
+export const db = drizzle(client, {
+  casing: "snake_case",
+  logger: serverEnv.NODE_ENV === "development"
+})
 
 export const takeFirst = <T>(values: T[]) => {
   if (values.length > 0) return values[0]
 }
 
-export const userTable = sqliteTable("user", {
+export const users = sqliteTable("users", {
   id: integer().primaryKey(),
   email: text().notNull(),
-  password: text().notNull()
+  passwordHash: text().notNull()
 })
 
-export const sessionTable = sqliteTable("session", {
+export const sessions = sqliteTable("sessions", {
   id: text().primaryKey(),
   userId: integer()
     .notNull()
-    .references(() => userTable.id),
+    .references(() => users.id),
   expiresAt: integer({ mode: "timestamp" }).notNull()
 })
 
-export type User = InferSelectModel<typeof userTable>
-export type Session = InferSelectModel<typeof sessionTable>
+export type User = InferSelectModel<typeof users>
+export type Session = InferSelectModel<typeof sessions>

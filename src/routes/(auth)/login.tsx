@@ -1,116 +1,138 @@
-import { createSignal, Show } from "solid-js"
+import { Show } from "solid-js"
+import { A, action, redirect, useAction, useSubmission } from "@solidjs/router"
 
-import { A, action, redirect, useSubmission } from "@solidjs/router"
+import type { SubmitHandler } from "@modular-forms/solid"
+import { createForm, FormError, valiForm } from "@modular-forms/solid"
 import { eq } from "drizzle-orm"
+import * as v from "valibot"
 
-import { IconBrandGoogle, IconEye, IconEyeOff } from "~/components/icons"
+import { IconBrandGoogle, IconLoader } from "~/components/icons"
+import { PasswordInput } from "~/components/password-input"
 import { Button } from "~/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card"
-import { TextField, TextFieldInput, TextFieldLabel } from "~/components/ui/text-field"
-import { db, takeFirst, userTable } from "~/lib/db"
+import {
+  TextField,
+  TextFieldErrorMessage,
+  TextFieldInput,
+  TextFieldLabel
+} from "~/components/ui/text-field"
+import { createSession, generateSessionToken, setSessionTokenCookie } from "~/lib/auth"
+import { db, takeFirst, users } from "~/lib/db"
+import { verifyPasswordHash } from "~/lib/password"
+
+const LoginSchema = v.object({
+  email: v.pipe(
+    v.string(),
+    v.nonEmpty("Please enter your email."),
+    v.email("The email address is badly formatted.")
+  ),
+  password: v.pipe(
+    v.string(),
+    v.nonEmpty("Please enter your password."),
+    v.minLength(8, "Your password must have 8 characters or more."),
+    v.maxLength(255, "Your password cant't have more than 255 characters.")
+  )
+})
+type LoginForm = v.InferInput<typeof LoginSchema>
 
 export default function Login() {
-  const [hidden, setHidden] = createSignal(true)
-  const submission = useSubmission(login)
+  const login = useAction(loginAction)
+  const submission = useSubmission(loginAction)
+
+  const [loginForm, { Form, Field }] = createForm<LoginForm>({
+    validate: valiForm(LoginSchema)
+  })
+
+  const handleSubmit: SubmitHandler<LoginForm> = async (values) => {
+    console.log("handlesubmit")
+    await login(values)
+    if (submission.result) {
+      throw new FormError<LoginForm>({ email: submission.result.message })
+    }
+    console.log("done")
+  }
 
   return (
-    <div class="flex min-h-screen flex-col items-center justify-center">
-      <Card class="w-full rounded-none md:w-96 md:rounded-lg">
-        <CardHeader>
-          <CardTitle class="text-center text-2xl">Login</CardTitle>
-        </CardHeader>
-        <CardContent class="flex flex-col gap-6">
-          <form class="flex flex-col gap-2" method="post" action={login}>
-            <TextField>
+    <div class="flex w-full flex-col justify-center gap-6 sm:max-w-sm">
+      <div class="flex flex-col gap-2">
+        <h3 class="scroll-m-20 text-2xl font-semibold tracking-tight">Welcome Back!</h3>
+        <p class="text-sm text-muted-foreground">Enter your email below to log into your account</p>
+      </div>
+      <Form class="flex flex-col gap-2" onSubmit={handleSubmit}>
+        <Field name="email">
+          {(field, props) => (
+            <TextField validationState={field.error ? "invalid" : "valid"}>
               <TextFieldLabel>Email</TextFieldLabel>
-              <TextFieldInput
-                id="email"
-                type="email"
-                name="email"
-                autocomplete="username"
-                required
-              />
+              <TextFieldInput {...props} type="email" autocomplete="username" required />
+              <TextFieldErrorMessage>{field.error}</TextFieldErrorMessage>
             </TextField>
-            <TextField>
+          )}
+        </Field>
+        <Field name="password">
+          {(field, props) => (
+            <TextField validationState={field.error ? "invalid" : "valid"}>
               <TextFieldLabel>Password</TextFieldLabel>
-              <div class="relative">
-                <TextFieldInput
-                  id="password"
-                  type={hidden() ? "password" : "text"}
-                  name="password"
-                  autocomplete="current-password"
-                  required
-                />
-                <Button
-                  variant="ghost"
-                  class="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                  onClick={() => setHidden((b) => !b)}
-                >
-                  <Show when={hidden()} fallback={<IconEyeOff />}>
-                    <IconEye />
-                  </Show>
-                </Button>
-              </div>
+              <PasswordInput {...props} autocomplete="current-password" required />
+              <TextFieldErrorMessage>{field.error}</TextFieldErrorMessage>
             </TextField>
-            <A href="" class="text-right text-sm underline">
-              Forgot password?
-            </A>
-            <Button type="submit">Login</Button>
-            <Show when={submission.result}>{(result) => <p>{result().message}</p>}</Show>
-          </form>
-          <div class="relative">
-            <div class="absolute inset-0 flex items-center">
-              <span class="w-full border-t" />
-            </div>
-            <div class="relative flex justify-center">
-              <span class="bg-background px-2 text-xs uppercase text-muted-foreground">
-                or continue with
-              </span>
-            </div>
-          </div>
-          <Button variant="outline" class="w-full">
-            <IconBrandGoogle class="mr-2" /> Google
-          </Button>
-          <div class="text-center text-sm">
-            Don&apos;t have an account?{" "}
-            <A href="#" class="underline">
-              Sign up
-            </A>
-          </div>
-        </CardContent>
-      </Card>
+          )}
+        </Field>
+        <A href="" class="text-right text-sm underline">
+          Forgot password?
+        </A>
+        <Button class="mt-2" disabled={loginForm.submitting} type="submit">
+          <Show when={loginForm.submitting}>
+            <IconLoader class="mr-2 animate-spin" />
+          </Show>
+          Login
+        </Button>
+      </Form>
+      <div class="relative">
+        <div class="absolute inset-0 flex items-center">
+          <span class="w-full border-t" />
+        </div>
+        <div class="relative flex justify-center">
+          <span class="bg-background px-2 text-xs uppercase text-muted-foreground">
+            or continue with
+          </span>
+        </div>
+      </div>
+      <Button variant="outline">
+        <IconBrandGoogle class="mr-2" /> Google
+      </Button>
+      <div class="text-center text-sm">
+        Don&apos;t have an account?{" "}
+        <A href="#" class="underline">
+          Register Now
+        </A>
+      </div>
     </div>
   )
 }
 
-const login = action(async (formData: FormData) => {
+const loginAction = action(async (data: LoginForm) => {
   "use server"
 
-  console.log("hello from the server")
-
-  const email = formData.get("email")
-  if (typeof email !== "string" || email.length >= 256 || !/^.+@.+\..+$/.test(email)) {
-    return new Error("Invalid email")
-  }
-
-  const password = formData.get("password")
-  if (typeof password !== "string" || password === "") {
-    return new Error("Invalid password")
-  }
-
-  console.log(email, password)
+  console.log("loginAction")
 
   const existingUser = await db
     .select()
-    .from(userTable)
-    .where(eq(userTable.email, email))
+    .from(users)
+    .where(eq(users.email, data.email))
     .then(takeFirst)
 
-  console.log("after select")
-
   if (!existingUser) {
-    return new Error("Incorrect username or password")
+    return new Error("Incorrect email or password.")
   }
 
-  throw redirect("/")
+  const validPassword = await verifyPasswordHash(existingUser.passwordHash, data.password)
+  if (!validPassword) {
+    return new Error("Incorrect email or password.")
+  }
+
+  const sessionToken = generateSessionToken()
+  const session = await createSession(sessionToken, existingUser.id)
+  console.log("session", session)
+  await setSessionTokenCookie(sessionToken)
+
+  return redirect("/dashboard")
 })

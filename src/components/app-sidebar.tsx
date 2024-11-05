@@ -1,33 +1,49 @@
 import { For } from "solid-js"
-
 import { A } from "@solidjs/router"
 
-import { IconCalendar, IconHome, IconInbox, IconSearch, IconSettings } from "~/components/icons"
+import { IconCalendar, IconHome, IconMail, IconSearch, IconSettings } from "~/components/icons"
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
-  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem
 } from "~/components/ui/sidebar"
 
 const items = [
-  { title: "Home", url: "#", icon: IconHome },
-  { title: "Inbox", url: "#", icon: IconInbox },
-  { title: "Calendar", url: "#", icon: IconCalendar },
-  { title: "Search", url: "#", icon: IconSearch },
-  { title: "Settings", url: "#", icon: IconSettings }
+  {
+    title: "Home",
+    url: "#",
+    icon: IconHome
+  },
+  {
+    title: "Inbox",
+    url: "#",
+    icon: IconMail
+  },
+  {
+    title: "Calendar",
+    url: "#",
+    icon: IconCalendar
+  },
+  {
+    title: "Search",
+    url: "#",
+    icon: IconSearch
+  },
+  {
+    title: "Settings",
+    url: "#",
+    icon: IconSettings
+  }
 ]
 
 export function AppSidebar() {
   return (
-    <Sidebar variant="floating">
-      <SidebarHeader>HEADER</SidebarHeader>
+    <Sidebar>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>
@@ -47,7 +63,6 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>FOOTER</SidebarFooter>
     </Sidebar>
   )
 }
