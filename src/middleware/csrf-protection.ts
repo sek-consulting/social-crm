@@ -10,40 +10,31 @@ function getHost(url: string) {
   }
 }
 
+function verifyRequestOrigin(originHeader: string, hostHeader: string) {
+  const origin = getHost(originHeader)
+  if (!origin) {
+    return false
+  }
+
+  let host
+  if (hostHeader.startsWith("http://") || hostHeader.startsWith("https://")) {
+    host = getHost(hostHeader)
+  } else {
+    host = getHost("https://" + hostHeader)
+  }
+
+  return origin === host
+}
+
 export const csrfProtection: RequestMiddleware = (event) => {
   if (event.request.method !== "GET") {
     const origin =
       (getHeader(event.nativeEvent, "Origin") || getHeader(event.nativeEvent, "Referrer")) ?? null
     const host = getHeader(event.nativeEvent, "Host") ?? null
 
-    if (!origin || !host || !(getHost(origin) === getHost(host))) {
+    if (!origin || !host || !verifyRequestOrigin(origin, host)) {
       event.nativeEvent.respondWith(new Response(null, { status: 403 }))
       return
     }
   }
 }
-
-// function verifyRequestOrigin(origin: string, allowedDomains: string[]) {
-//   if (!origin || allowedDomains.length === 0) {
-//     return false
-//   }
-//   const originHost = getHost(origin)
-
-//   if (!originHost) {
-//     return false
-//   }
-
-//   for (const domain of allowedDomains) {
-//     let host
-//     if (domain.startsWith("http://") || domain.startsWith("https://")) {
-//       host = getHost(domain)
-//     } else {
-//       host = getHost("https://" + domain)
-//     }
-
-//     if (originHost === host) {
-//       return true
-//     }
-//   }
-//   return false
-// }
