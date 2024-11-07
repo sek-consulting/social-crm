@@ -38,7 +38,7 @@ export const csrfProtection: RequestMiddleware = (event) => {
       (getHeader(event.nativeEvent, "Origin") || getHeader(event.nativeEvent, "Referrer")) ?? null
     const host = getHeader(event.nativeEvent, "Host") ?? null
 
-    if (!origin || !host || !verifyRequestOrigin(origin, host)) {
+    if (!origin || !host || !verifyRequestOrigin(origin, [host])) {
       event.nativeEvent.respondWith(new Response(null, { status: 403 }))
       return
     }
