@@ -10,20 +10,26 @@ function getHost(url: string) {
   }
 }
 
-function verifyRequestOrigin(originHeader: string, hostHeader: string) {
-  const origin = getHost(originHeader)
-  if (!origin) {
+export function verifyRequestOrigin(origin: string, allowedDomains: string[]): boolean {
+  if (!origin || allowedDomains.length === 0) {
     return false
   }
-
-  let host
-  if (hostHeader.startsWith("http://") || hostHeader.startsWith("https://")) {
-    host = getHost(hostHeader)
-  } else {
-    host = getHost("https://" + hostHeader)
+  const originHost = getHost(origin)
+  if (!originHost) {
+    return false
   }
-
-  return origin === host
+  for (const domain of allowedDomains) {
+    let host: string | null
+    if (domain.startsWith("http://") || domain.startsWith("https://")) {
+      host = getHost(domain)
+    } else {
+      host = getHost("https://" + domain)
+    }
+    if (originHost === host) {
+      return true
+    }
+  }
+  return false
 }
 
 export const csrfProtection: RequestMiddleware = (event) => {
