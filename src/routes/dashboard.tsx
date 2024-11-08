@@ -1,4 +1,4 @@
-import { type ParentProps } from "solid-js"
+import { Suspense, type ParentProps } from "solid-js"
 import type { RouteDefinition } from "@solidjs/router"
 import { createAsync } from "@solidjs/router"
 
@@ -14,17 +14,14 @@ export const route: RouteDefinition = {
 
 export default function DashboardLayout(props: ParentProps) {
   const user = createAsync(() => getUser(), { deferStream: true })
-  // const AuthContext = createContext<typeof user>()
 
   return (
     <SidebarProvider>
-      {/* <AuthContext.Provider value={user}> */}
       <AppSidebar />
       <main>
         <SidebarTrigger />
-        {props.children}
+        <Suspense>{props.children}</Suspense>
       </main>
-      {/* </AuthContext.Provider> */}
     </SidebarProvider>
   )
 }
