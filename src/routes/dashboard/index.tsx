@@ -1,21 +1,10 @@
-import { logout } from "~/lib/auth"
-
-// export const route = {
-//   preload() {
-//     getUser()
-//   }
-// } satisfies RouteDefinition
+import LogoutButton from "~/components/logout-button"
 
 export default function Dashboard() {
-  // const user = createAsync(() => getUser(), { deferStream: true })
   return (
     <>
       <div>Hello World!</div>
-      <form action={logout} method="post">
-        <button name="logout" type="submit">
-          Logout
-        </button>
-      </form>
+      <LogoutButton />
     </>
   )
 }

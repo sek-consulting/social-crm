@@ -1,14 +1,13 @@
-import { action, query, redirect } from "@solidjs/router"
+import { action, query, redirect, revalidate } from "@solidjs/router"
 
 import { eq } from "drizzle-orm"
-import { useSession } from "vinxi/http"
 
-import { serverEnv } from "~/env/server"
 import { verifyPasswordHash } from "~/lib/auth/password"
 import {
   createSession,
   deleteSessionTokenCookie,
   generateSessionToken,
+  getSessionCookie,
   setSessionTokenCookie,
   validateSessionToken
 } from "~/lib/auth/session"
@@ -33,8 +32,7 @@ export const login = action(async (data: { email: string; password: string }) =>
   }
 
   const sessionToken = generateSessionToken()
-  const session = await createSession(sessionToken, existingUser.id)
-  console.log("session", session)
+  await createSession(sessionToken, existingUser.id)
   await setSessionTokenCookie(sessionToken)
 
   return redirect("/dashboard")
@@ -43,28 +41,17 @@ export const login = action(async (data: { email: string; password: string }) =>
 export const logout = action(async () => {
   "use server"
   await deleteSessionTokenCookie()
-  throw redirect("/login")
+  return revalidate("getUser")
 })
 
 export const getUser = query(async () => {
   "use server"
-  try {
-    console.log("getuser")
-    const cookie = await useSession({ password: serverEnv.SESSION_SECRET })
-    const token = cookie.data.token
-    console.log("token", cookie.data)
-    if (token === null) {
-      throw new Error("Token not found")
-    }
-    const { user } = await validateSessionToken(token)
-    console.log("user", user)
-    if (user === null) {
-      throw new Error("User not found")
-    }
-    return user
-  } catch (err) {
-    console.log("error", err)
-    await deleteSessionTokenCookie()
+  const cookie = await getSessionCookie()
+  const { user } = await validateSessionToken(cookie.data.token ?? "")
+  if (user === null) {
+    //await deleteSessionTokenCookie() // <-- this crashes the application
+    console.log("no user -> redirect")
     throw redirect("/login")
   }
+  return user
 }, "getUser")

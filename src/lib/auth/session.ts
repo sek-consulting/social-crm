@@ -11,10 +11,6 @@ import type { Session, User } from "~/lib/db"
 
 const TOKEN_EXPIRATION = 1000 * 60 * 60 * 24 * 30 // 30 days
 
-export type SessionValidationResult =
-  | { session: Session; user: User }
-  | { session: null; user: null }
-
 export function generateSessionToken(): string {
   const bytes = new Uint8Array(20)
   crypto.getRandomValues(bytes)
@@ -34,8 +30,15 @@ export async function createSession(token: string, userId: number): Promise<Sess
   return session
 }
 
+export type SessionValidationResult =
+  | { session: Session; user: User }
+  | { session: null; user: null }
+
 export async function validateSessionToken(token: string): Promise<SessionValidationResult> {
   "use server"
+  if (!token) {
+    return { session: null, user: null }
+  }
   const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)))
   const result = await db
     .select({ user: users, session: sessions })
@@ -71,18 +74,23 @@ export async function invalidateSession(sessionId: string): Promise<void> {
   await db.delete(sessions).where(eq(sessions.id, sessionId))
 }
 
+export type SessionCookie = {
+  token: string | undefined
+}
+
+export async function getSessionCookie() {
+  "use server"
+  return await useSession<SessionCookie>({ password: serverEnv.SESSION_SECRET })
+}
+
 export async function setSessionTokenCookie(token: string) {
   "use server"
-  const cookie = await useSession({ password: serverEnv.SESSION_SECRET })
-  await cookie.update((data) => {
-    data.token = token
-  })
+  const cookie = await getSessionCookie()
+  await cookie.update((data: SessionCookie) => ((data.token = token), data))
 }
 
 export async function deleteSessionTokenCookie() {
   "use server"
-  const cookie = await useSession({ password: serverEnv.SESSION_SECRET })
-  await cookie.update((data) => {
-    data.token = undefined
-  })
+  const cookie = await getSessionCookie()
+  await cookie.update((data: SessionCookie) => (data.token = undefined))
 }

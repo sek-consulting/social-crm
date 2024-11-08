@@ -40,12 +40,10 @@ export default function Login() {
   })
 
   const handleSubmit: SubmitHandler<LoginForm> = async (values) => {
-    console.log("handlesubmit")
     await login(values)
     if (submission.result) {
       throw new FormError<LoginForm>({ email: submission.result.message })
     }
-    console.log("done")
   }
 
   return (
