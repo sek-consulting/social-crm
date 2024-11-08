@@ -4,6 +4,6 @@ export default defineConfig({
   ssr: true,
   middleware: "./src/middleware/index.ts",
   server: {
-    preset: "vercel"
+    preset: "netlify"
   }
 })
