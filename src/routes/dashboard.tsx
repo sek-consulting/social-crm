@@ -13,7 +13,7 @@ export const route: RouteDefinition = {
 }
 
 export default function DashboardLayout(props: ParentProps) {
-  const user = createAsync(() => getUser())
+  const user = createAsync(() => getUser(), { deferStream: true })
   // const AuthContext = createContext<typeof user>()
 
   return (
