@@ -29,8 +29,14 @@ const IconFilled = (props: IconProps) => {
 
 export function IconLogo(props: IconProps) {
   return (
-    <IconOutline viewBox="0 0 256 256" {...props}>
-      {/* TODO: Implement this */}
+    <IconOutline {...props}>
+      <path d="M12 5m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+      <path d="M5 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+      <path d="M19 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+      <path d="M12 14m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+      <path d="M12 7l0 4" />
+      <path d="M6.7 17.8l2.8 -2" />
+      <path d="M17.3 17.8l-2.8 -2" />
     </IconOutline>
   )
 }
@@ -381,14 +387,7 @@ export function IconLaptop(props: IconProps) {
 export function IconLoader(props: IconProps) {
   return (
     <IconOutline {...props}>
-      <path d="M12 6l0 -3" />
-      <path d="M16.25 7.75l2.15 -2.15" />
-      <path d="M18 12l3 0" />
-      <path d="M16.25 16.25l2.15 2.15" />
-      <path d="M12 18l0 3" />
-      <path d="M7.75 16.25l-2.15 2.15" />
-      <path d="M6 12l-3 0" />
-      <path d="M7.75 7.75l-2.15 -2.15" />
+      <path d="M12 3a9 9 0 1 0 9 9" />
     </IconOutline>
   )
 }
