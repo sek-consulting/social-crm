@@ -1,9 +1,8 @@
 import { Show } from "solid-js"
-import { A, action, redirect, useAction, useSubmission } from "@solidjs/router"
+import { A, useAction, useSubmission } from "@solidjs/router"
 
 import type { SubmitHandler } from "@modular-forms/solid"
 import { createForm, FormError, valiForm } from "@modular-forms/solid"
-import { eq } from "drizzle-orm"
 import * as v from "valibot"
 
 import { IconBrandGoogle, IconLoader } from "~/components/icons"
@@ -15,9 +14,7 @@ import {
   TextFieldInput,
   TextFieldLabel
 } from "~/components/ui/text-field"
-import { createSession, generateSessionToken, setSessionTokenCookie } from "~/lib/auth"
-import { db, takeFirst, users } from "~/lib/db"
-import { verifyPasswordHash } from "~/lib/password"
+import { login as loginAction } from "~/lib/auth"
 
 const LoginSchema = v.object({
   email: v.pipe(
@@ -108,31 +105,3 @@ export default function Login() {
     </div>
   )
 }
-
-const loginAction = action(async (data: LoginForm) => {
-  "use server"
-
-  console.log("loginAction")
-
-  const existingUser = await db
-    .select()
-    .from(users)
-    .where(eq(users.email, data.email))
-    .then(takeFirst)
-
-  if (!existingUser) {
-    return new Error("Incorrect email or password.")
-  }
-
-  const validPassword = await verifyPasswordHash(existingUser.passwordHash, data.password)
-  if (!validPassword) {
-    return new Error("Incorrect email or password.")
-  }
-
-  const sessionToken = generateSessionToken()
-  const session = await createSession(sessionToken, existingUser.id)
-  console.log("session", session)
-  await setSessionTokenCookie(sessionToken)
-
-  return redirect("/dashboard")
-})

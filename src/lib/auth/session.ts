@@ -1,7 +1,5 @@
 import crypto from "crypto"
 
-import { action, query, redirect } from "@solidjs/router"
-
 import { sha256 } from "@oslojs/crypto/sha2"
 import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from "@oslojs/encoding"
 import { eq } from "drizzle-orm"
@@ -25,6 +23,7 @@ export function generateSessionToken(): string {
 }
 
 export async function createSession(token: string, userId: number): Promise<Session> {
+  "use server"
   const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)))
   const session: Session = {
     id: sessionId,
@@ -36,6 +35,7 @@ export async function createSession(token: string, userId: number): Promise<Sess
 }
 
 export async function validateSessionToken(token: string): Promise<SessionValidationResult> {
+  "use server"
   const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)))
   const result = await db
     .select({ user: users, session: sessions })
@@ -49,13 +49,11 @@ export async function validateSessionToken(token: string): Promise<SessionValida
   }
   const { user, session } = result
 
-  // session expired
   if (Date.now() >= session.expiresAt.getTime()) {
     await db.delete(sessions).where(eq(sessions.id, session.id))
     return { session: null, user: null }
   }
 
-  // refresh session if less than 50% time left
   if (Date.now() >= session.expiresAt.getTime() - TOKEN_EXPIRATION / 2) {
     session.expiresAt = new Date(Date.now() + TOKEN_EXPIRATION)
     await db
@@ -69,10 +67,12 @@ export async function validateSessionToken(token: string): Promise<SessionValida
 }
 
 export async function invalidateSession(sessionId: string): Promise<void> {
+  "use server"
   await db.delete(sessions).where(eq(sessions.id, sessionId))
 }
 
 export async function setSessionTokenCookie(token: string) {
+  "use server"
   const cookie = await useSession({ password: serverEnv.SESSION_SECRET })
   await cookie.update((data) => {
     data.token = token
@@ -80,37 +80,9 @@ export async function setSessionTokenCookie(token: string) {
 }
 
 export async function deleteSessionTokenCookie() {
+  "use server"
   const cookie = await useSession({ password: serverEnv.SESSION_SECRET })
   await cookie.update((data) => {
     data.token = undefined
   })
 }
-
-export const getUser = query(async () => {
-  "use server"
-  try {
-    console.log("getuser")
-    const cookie = await useSession({ password: serverEnv.SESSION_SECRET })
-    const token = cookie.data.token
-    console.log("token", cookie.data)
-    if (token === null) {
-      throw new Error("Token not found")
-    }
-    const { user } = await validateSessionToken(token)
-    console.log("user", user)
-    if (user === null) {
-      throw new Error("User not found")
-    }
-    return user
-  } catch (err) {
-    console.log("error", err)
-    await deleteSessionTokenCookie()
-    throw redirect("/login")
-  }
-}, "getUser")
-
-export const logout = action(async () => {
-  "use server"
-  await deleteSessionTokenCookie()
-  throw redirect("/login")
-})
