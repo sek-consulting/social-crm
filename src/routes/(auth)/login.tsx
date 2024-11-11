@@ -14,7 +14,7 @@ import {
   TextFieldInput,
   TextFieldLabel
 } from "~/components/ui/text-field"
-import { login as loginAction } from "~/lib/auth"
+import { login } from "~/lib/auth"
 
 const LoginSchema = v.object({
   email: v.pipe(
@@ -32,17 +32,17 @@ const LoginSchema = v.object({
 type LoginForm = v.InferInput<typeof LoginSchema>
 
 export default function Login() {
-  const login = useAction(loginAction)
-  const submission = useSubmission(loginAction)
+  const loginAction = useAction(login)
+  const loginSubmission = useSubmission(login)
 
   const [loginForm, { Form, Field }] = createForm<LoginForm>({
     validate: valiForm(LoginSchema)
   })
 
   const handleSubmit: SubmitHandler<LoginForm> = async (values) => {
-    await login(values)
-    if (submission.result) {
-      throw new FormError<LoginForm>({ email: submission.result.message })
+    await loginAction(values)
+    if (loginSubmission.result) {
+      throw new FormError<LoginForm>({ email: loginSubmission.result.message })
     }
   }
 

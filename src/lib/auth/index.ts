@@ -49,8 +49,6 @@ export const getUser = query(async () => {
   const cookie = await getSessionCookie()
   const { user } = await validateSessionToken(cookie.data.token ?? "")
   if (user === null) {
-    //await deleteSessionTokenCookie() // <-- enabling this crashes the application
-    console.log("no user -> redirect")
     throw redirect("/login")
   }
   return user

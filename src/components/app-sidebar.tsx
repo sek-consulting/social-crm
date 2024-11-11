@@ -53,7 +53,13 @@ export function AppSidebar() {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
-        <SidebarMenuButton as={A} href="/" tooltip="SOCIAL CRM">
+        <SidebarMenuButton
+          class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+          size="lg"
+          as={A}
+          href="/"
+          tooltip="SOCIAL CRM"
+        >
           <div class="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
             <IconLogo />
           </div>{" "}

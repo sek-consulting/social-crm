@@ -12,6 +12,7 @@
     "db:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
+    "@ark-ui/solid": "^4.4.0",
     "@fontsource/inter": "^5.1.0",
     "@kobalte/core": "^0.13.7",
     "@libsql/client": "^0.14.0",

@@ -249,7 +249,7 @@ const SidebarTrigger = <T extends ValidComponent = "button">(props: SidebarTrigg
       data-sidebar="trigger"
       variant="ghost"
       size="icon"
-      class={cn("h-7 w-7", local.class)}
+      class={cn("size-7", local.class)}
       onClick={(event: MouseEvent) => {
         local.onClick?.(event)
         toggleSidebar()
@@ -507,7 +507,7 @@ const SidebarMenuButton = <T extends ValidComponent = "button">(
 
   return (
     <Show when={local.tooltip} fallback={button}>
-      <Tooltip placement="right" gutter={2}>
+      <Tooltip placement="right">
         <TooltipTrigger class="w-full">{button}</TooltipTrigger>
         <TooltipContent hidden={state() !== "collapsed" || isMobile()}>
           {local.tooltip}
