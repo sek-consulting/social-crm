@@ -1,9 +1,9 @@
-import { Suspense, type ParentProps } from "solid-js"
+import { createEffect, Suspense, type ParentProps } from "solid-js"
 import type { RouteDefinition } from "@solidjs/router"
 import { createAsync } from "@solidjs/router"
 
 import { AppSidebar } from "~/components/app-sidebar"
-import { SidebarProvider, SidebarTrigger } from "~/components/ui/sidebar"
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "~/components/ui/sidebar"
 import { getUser } from "~/lib/auth"
 
 export const route: RouteDefinition = {
@@ -14,14 +14,15 @@ export const route: RouteDefinition = {
 
 export default function DashboardLayout(props: ParentProps) {
   const user = createAsync(() => getUser(), { deferStream: true })
+  createEffect(() => console.log(user))
 
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main>
+      <SidebarInset>
         <SidebarTrigger />
         <Suspense>{props.children}</Suspense>
-      </main>
+      </SidebarInset>
     </SidebarProvider>
   )
 }

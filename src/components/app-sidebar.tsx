@@ -1,13 +1,21 @@
 import { For } from "solid-js"
 import { A } from "@solidjs/router"
 
-import { IconCalendar, IconHome, IconMail, IconSearch, IconSettings } from "~/components/icons"
+import {
+  IconCalendar,
+  IconHome,
+  IconLogo,
+  IconMail,
+  IconSearch,
+  IconSettings
+} from "~/components/icons"
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem
@@ -43,7 +51,15 @@ const items = [
 
 export function AppSidebar() {
   return (
-    <Sidebar>
+    <Sidebar collapsible="icon">
+      <SidebarHeader>
+        <SidebarMenuButton as={A} href="/" tooltip="SOCIAL CRM">
+          <div class="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+            <IconLogo />
+          </div>{" "}
+          SOCIAL CRM
+        </SidebarMenuButton>
+      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>
@@ -52,7 +68,7 @@ export function AppSidebar() {
               <For each={items}>
                 {(item) => (
                   <SidebarMenuItem>
-                    <SidebarMenuButton as={A} href={item.url}>
+                    <SidebarMenuButton as={A} href={item.url} tooltip={item.title}>
                       <item.icon />
                       <span>{item.title}</span>
                     </SidebarMenuButton>

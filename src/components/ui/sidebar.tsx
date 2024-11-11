@@ -507,9 +507,8 @@ const SidebarMenuButton = <T extends ValidComponent = "button">(
 
   return (
     <Show when={local.tooltip} fallback={button}>
-      <Tooltip placement="right">
-        {/* TODO: CHECK IF THIS WORKS! */}
-        <TooltipTrigger>{button}</TooltipTrigger>
+      <Tooltip placement="right" gutter={2}>
+        <TooltipTrigger class="w-full">{button}</TooltipTrigger>
         <TooltipContent hidden={state() !== "collapsed" || isMobile()}>
           {local.tooltip}
         </TooltipContent>
