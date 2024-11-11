@@ -67,13 +67,13 @@
     --input: 0 0% 14.9%;
     --ring: 0 0% 83.1%;
 
-    --info: 204 94% 94%;
+    --info: 226.2 57% 21%;
     --info-foreground: 199 89% 48%;
-    --success: 149 80% 90%;
+    --success: 165.7 91.3% 9%;
     --success-foreground: 160 84% 39%;
-    --warning: 48 96% 89%;
+    --warning: 26 83.3% 14.1%;
     --warning-foreground: 25 95% 53%;
-    --error: 0 93% 94%;
+    --error: 0 74.7% 15.5%;
     --error-foreground: 0 84% 60%;
 
     --sidebar-background: 240 5.9% 10%;

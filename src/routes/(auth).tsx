@@ -24,7 +24,7 @@ export default function AuthLayout(props: ParentProps) {
 
   return (
     <div class="grid h-screen lg:grid-cols-2">
-      <div class="hidden size-full flex-col justify-between bg-muted p-12 lg:flex">
+      <div class="hidden size-full flex-col justify-between border-r border-sidebar-border bg-sidebar p-12 lg:flex">
         <div class=""># SOCIAL CRM</div>
         <blockquote class="border-l-2 pl-6 italic">
           “{quote.text}” ~{quote.author}
