@@ -184,6 +184,17 @@ export function IconBrandYoutube(props: IconProps) {
   )
 }
 
+export function IconBriefcase(props: IconProps) {
+  return (
+    <IconOutline {...props}>
+      <path d="M3 7m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
+      <path d="M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2" />
+      <path d="M12 12l0 .01" />
+      <path d="M3 13a20 20 0 0 0 18 0" />
+    </IconOutline>
+  )
+}
+
 export function IconCalendar(props: IconProps) {
   return (
     <IconOutline {...props}>
@@ -392,11 +403,42 @@ export function IconLoader(props: IconProps) {
   )
 }
 
+export function IconLogout(props: IconProps) {
+  return (
+    <IconOutline {...props}>
+      <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+      <path d="M9 12h12l-3 -3" />
+      <path d="M18 15l3 -3" />
+    </IconOutline>
+  )
+}
+
 export function IconMail(props: IconProps) {
   return (
     <IconOutline {...props}>
       <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
       <path d="M3 7l9 6l9 -6" />
+    </IconOutline>
+  )
+}
+
+export function IconMap(props: IconProps) {
+  return (
+    <IconOutline {...props}>
+      <path d="M12 18.5l-3 -1.5l-6 3v-13l6 -3l6 3l6 -3v7.5" />
+      <path d="M9 4v13" />
+      <path d="M15 7v5.5" />
+      <path d="M21.121 20.121a3 3 0 1 0 -4.242 0c.418 .419 1.125 1.045 2.121 1.879c1.051 -.89 1.759 -1.516 2.121 -1.879z" />
+      <path d="M19 18v.01" />
+    </IconOutline>
+  )
+}
+
+export function IconMapPin(props: IconProps) {
+  return (
+    <IconOutline {...props}>
+      <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+      <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
     </IconOutline>
   )
 }
@@ -564,6 +606,18 @@ export function IconTerminal(props: IconProps) {
     <IconOutline {...props}>
       <path d="M5 7l5 5l-5 5" />
       <path d="M12 19l7 0" />
+    </IconOutline>
+  )
+}
+
+export function IconTodo(props: IconProps) {
+  return (
+    <IconOutline {...props}>
+      <rect x="3" y="5" width="6" height="6" rx="1" />
+      <path d="m3 17 2 2 4-4" />
+      <path d="M13 6h8" />
+      <path d="M13 12h8" />
+      <path d="M13 18h8" />
     </IconOutline>
   )
 }
