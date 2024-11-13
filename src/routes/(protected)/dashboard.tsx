@@ -13,9 +13,9 @@ export default function Dashboard() {
 
   const data = {
     cards: [
-      { title: "Total Customers", icon: IconUsers, value: 1234, text: "+15% from last month" },
+      { title: "Total Clients", icon: IconUsers, value: 1234, text: "+15% from last month" },
       { title: "Active Brands", icon: IconBriefcase, value: 65, text: "+3 new this week" },
-      { title: "Location", icon: IconMapPin, value: 89, text: "Across 12 countries" },
+      { title: "Locations", icon: IconMapPin, value: 89, text: "Across 12 countries" },
       { title: "Ongoing Projects", icon: IconTodo, value: 32, text: "7 due this week" }
     ],
     chart: {
@@ -44,11 +44,11 @@ export default function Dashboard() {
     activities: [
       { title: "New project started", timestamp: new Date(Date.now() - 300000) }, // 5 minutes ago
       { title: "New location added", timestamp: new Date(Date.now() - 600000) }, // 10 minutes ago
-      { title: "New user added", timestamp: new Date(Date.now() - 3600000) }, // 1 hour ago
+      { title: "New client added", timestamp: new Date(Date.now() - 3600000) }, // 1 hour ago
       { title: "Location removed", timestamp: new Date(Date.now() - 5400000) }, // 1.5 hours ago
       { title: "New location added", timestamp: new Date(Date.now() - 7200000) }, // 2 hours ago
-      { title: "Customer updated", timestamp: new Date(Date.now() - 10800000) }, // 3 hours ago
-      { title: "Customer removed", timestamp: new Date(Date.now() - 18000000) }, // 5 hours ago
+      { title: "Client updated", timestamp: new Date(Date.now() - 10800000) }, // 3 hours ago
+      { title: "Client removed", timestamp: new Date(Date.now() - 18000000) }, // 5 hours ago
       { title: "Task finished", timestamp: new Date(Date.now() - 43200000) }, // 12 hours ago
       { title: "Project status updated", timestamp: new Date(Date.now() - 86400000) }, // 1 day ago
       { title: "Project closed", timestamp: new Date(Date.now() - 172800000) } // 2 days ago

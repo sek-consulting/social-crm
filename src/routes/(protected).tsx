@@ -36,7 +36,7 @@ function split(path: string) {
     )
 }
 
-export default function DashboardLayout(props: ParentProps) {
+export default function ProtectedLayout(props: ParentProps) {
   const user = createAsync(() => getUser(), { deferStream: true })
 
   const location = useLocation()
