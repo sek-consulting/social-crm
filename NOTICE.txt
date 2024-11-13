@@ -3,7 +3,7 @@ social-crm
 The following is a list of sources from which code was used/modified in this codebase.
 
 -------------------------------------------------------------------------------
-This codebase contains some icons from tabler-icons:
+This codebase contains icons from tabler-icons:
   * SOURCE:
     * https://github.com/tabler/tabler-icons
 
@@ -31,7 +31,7 @@ This codebase contains some icons from tabler-icons:
     SOFTWARE.
 
 -------------------------------------------------------------------------------
-This codebase contains some icons from lucide-icons:
+This codebase contains icons from lucide-icons:
   * SOURCE:
     * https://github.com/lucide-icons/lucide
 

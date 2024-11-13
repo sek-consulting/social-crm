@@ -1,14 +1,7 @@
 import { For } from "solid-js"
 import { A } from "@solidjs/router"
 
-import {
-  IconCalendar,
-  IconHome,
-  IconLogo,
-  IconMail,
-  IconSearch,
-  IconSettings
-} from "~/components/icons"
+import { IconLogo } from "~/components/icons"
 import {
   Sidebar,
   SidebarContent,
@@ -20,34 +13,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem
 } from "~/components/ui/sidebar"
-
-const items = [
-  {
-    title: "Home",
-    url: "#",
-    icon: IconHome
-  },
-  {
-    title: "Inbox",
-    url: "#",
-    icon: IconMail
-  },
-  {
-    title: "Calendar",
-    url: "#",
-    icon: IconCalendar
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: IconSearch
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: IconSettings
-  }
-]
+import { appConfig } from "~/config/app"
 
 export function AppSidebar() {
   return (
@@ -71,7 +37,7 @@ export function AppSidebar() {
           <SidebarGroupLabel>Application</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              <For each={items}>
+              <For each={appConfig.mainNav}>
                 {(item) => (
                   <SidebarMenuItem>
                     <SidebarMenuButton as={A} href={item.url} tooltip={item.title}>

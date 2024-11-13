@@ -4,6 +4,7 @@ import { createAsync, useLocation } from "@solidjs/router"
 
 import { AppSidebar } from "~/components/app-sidebar"
 import { ModeToggle } from "~/components/mode-toggle"
+import SearchBar from "~/components/search-bar"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -72,6 +73,7 @@ export default function ProtectedLayout(props: ParentProps) {
                 </Breadcrumb>
               </div>
               <div class="flex items-center gap-2">
+                <SearchBar />
                 <ModeToggle />
                 <UserNav />
               </div>
