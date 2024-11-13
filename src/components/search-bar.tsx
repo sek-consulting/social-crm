@@ -23,9 +23,7 @@ export default function SearchBar() {
         setOpen((open) => !open)
       }
     }
-
     document.addEventListener("keydown", down)
-
     onCleanup(() => document.removeEventListener("keydown", down))
   })
 

@@ -7,4 +7,6 @@ export const ServerSchema = v.object({
   SESSION_SECRET: v.optional(v.string(), "areallylongsecretthatyoushouldreplace")
 })
 
-export const ClientSchema = v.object({})
+export const ClientSchema = v.object({
+  // TODO: ???
+})
