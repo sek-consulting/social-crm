@@ -29,6 +29,9 @@ dependencies:
   '@oslojs/encoding':
     specifier: ^1.1.0
     version: 1.1.0
+  '@solid-primitives/refs':
+    specifier: ^1.0.8
+    version: 1.0.8(solid-js@1.9.3)
   '@solidjs/router':
     specifier: ^0.15.0
     version: 0.15.0(solid-js@1.9.3)
@@ -38,6 +41,9 @@ dependencies:
   autoprefixer:
     specifier: ^10.4.20
     version: 10.4.20(postcss@8.4.47)
+  chart.js:
+    specifier: ^4.4.6
+    version: 4.4.6
   class-variance-authority:
     specifier: ^0.7.0
     version: 0.7.0
@@ -1786,6 +1792,10 @@ packages:
       '@solid-primitives/refs': 1.0.8(solid-js@1.9.3)
       '@solid-primitives/utils': 6.2.3(solid-js@1.9.3)
       solid-js: 1.9.3
+    dev: false
+
+  /@kurkle/color@0.3.2:
+    resolution: {integrity: sha512-fuscdXJ9G1qb7W8VdHi+IwRqij3lBkosAm4ydQtEmbY58OzHXqQhvlxqEkoz0yssNVn38bcpRWgA9PP+OGoisw==}
     dev: false
 
   /@libsql/client@0.14.0:
@@ -4149,6 +4159,13 @@ packages:
   /chalk@5.3.0:
     resolution: {integrity: sha512-dLitG79d+GV1Nb/VYcCDFivJeK1hiukt9QjRNVOsUtTy1rR1YJsmpGGTZ3qJos+uw7WmWF4wUwBd9jxjocFC2w==}
     engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
+    dev: false
+
+  /chart.js@4.4.6:
+    resolution: {integrity: sha512-8Y406zevUPbbIBA/HRk33khEmQPk5+cxeflWE/2rx1NJsjVWMPw/9mSP9rxHP5eqi6LNoPBVMfZHxbwLSgldYA==}
+    engines: {pnpm: '>=8'}
+    dependencies:
+      '@kurkle/color': 0.3.2
     dev: false
 
   /chokidar@3.6.0:

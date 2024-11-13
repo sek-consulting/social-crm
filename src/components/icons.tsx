@@ -43,6 +43,14 @@ export function IconLogo(props: IconProps) {
 
 // ICONS
 
+export function IconActivity(props: IconProps) {
+  return (
+    <IconOutline {...props}>
+      <path d="M3 12h4l3 8l4 -16l3 8h4" />
+    </IconOutline>
+  )
+}
+
 export function IconAlertTriangle(props: IconProps) {
   return (
     <IconOutline {...props}>

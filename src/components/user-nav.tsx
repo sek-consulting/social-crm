@@ -3,11 +3,12 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "~/components/ui/dropdown-menu"
 import { logout } from "~/lib/auth"
 
-import { IconLogout } from "./icons"
+import { IconLogout, IconSettings } from "./icons"
 
 export function UserNav() {
   return (
@@ -16,6 +17,11 @@ export function UserNav() {
         <AvatarFallback>EK</AvatarFallback>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
+        <DropdownMenuItem>
+          <IconSettings class="mr-2" />
+          Settings
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
         <form action={logout} method="post">
           <DropdownMenuItem as="button" type="submit" class="w-full">
             <IconLogout class="mr-2" />
