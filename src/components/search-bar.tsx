@@ -1,6 +1,7 @@
 import { createEffect, createSignal, For, onCleanup } from "solid-js"
 import { useNavigate } from "@solidjs/router"
 
+import { IconCommand } from "~/components/icons"
 import { Button } from "~/components/ui/button"
 import {
   CommandDialog,
@@ -11,8 +12,6 @@ import {
   CommandList
 } from "~/components/ui/command"
 import { appConfig } from "~/config/app"
-
-import { IconCommand, IconFile, IconSearch } from "./icons"
 
 export default function SearchBar() {
   const [open, setOpen] = createSignal(false)
@@ -41,7 +40,7 @@ export default function SearchBar() {
       <Button
         id="search-trigger"
         variant="outline"
-        class="flex w-48 items-center justify-between p-2 text-muted-foreground"
+        class="flex h-8 w-48 items-center justify-between bg-muted/50 p-1 pl-2 text-muted-foreground"
         onClick={() => setOpen(true)}
       >
         <span>Search...</span>
