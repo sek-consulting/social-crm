@@ -1,3 +1,3 @@
-export default function Clients() {
-  return <>Clients Overview</>
+export default function ClientList() {
+  return <>Clients</>
 }

@@ -1,3 +1,3 @@
-export default function ShowClient() {
-  return <>Show Client</>
+export default function ClientDetail() {
+  return <>Client Detail</>
 }

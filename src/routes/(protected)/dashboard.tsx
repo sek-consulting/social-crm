@@ -37,7 +37,8 @@ export default function Dashboard() {
         {
           label: "Customer Growth",
           data: [2890, 2756, 3322, 3470, 3475, 3129, 3490, 2903, 2643, 2837, 2954, 3239],
-          backgroundColor: "#34d399"
+          backgroundColor: "#34d399",
+          borderRadius: 6
         }
       ]
     },

@@ -38,7 +38,7 @@ export default function SearchBar() {
       <Button
         id="search-trigger"
         variant="outline"
-        class="flex h-8 w-48 items-center justify-between bg-muted/50 p-1 pl-2 text-muted-foreground"
+        class="flex h-8 w-32 items-center justify-between bg-muted/50 p-1 pl-2 text-muted-foreground md:w-48"
         onClick={() => setOpen(true)}
       >
         <span>Search...</span>
@@ -48,7 +48,7 @@ export default function SearchBar() {
         </kbd>
       </Button>
       <CommandDialog open={open()} onOpenChange={setOpen}>
-        <CommandInput placeholder="Search application..." />
+        <CommandInput placeholder="Search..." />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup>
