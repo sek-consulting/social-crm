@@ -19,26 +19,19 @@ export default function Dashboard() {
       { title: "Ongoing Projects", icon: IconTodo, value: 32, text: "7 due this week" }
     ],
     chart: {
-      labels: [
-        "Jan 24",
-        "Feb 24",
-        "Mar 24",
-        "Apr 24",
-        "May 24",
-        "Jun 24",
-        "Jul 24",
-        "Aug 24",
-        "Sep 24",
-        "Oct 24",
-        "Nov 24",
-        "Dec 24"
-      ],
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
       datasets: [
         {
-          label: "Customer Growth",
-          data: [2890, 2756, 3322, 3470, 3475, 3129, 3490, 2903, 2643, 2837, 2954, 3239],
-          backgroundColor: "#34d399",
-          borderRadius: 6
+          label: "2023",
+          data: [23, 56, 78, 12, 45, 89, 34, 67, 90, 11, 55, 38],
+          backgroundColor: "#2563eb",
+          borderRadius: 5
+        },
+        {
+          label: "2024",
+          data: [32, 49, 67, 21, 50, 77, 29, 85, 92, 18, 61, 42],
+          backgroundColor: "#60a5fa",
+          borderRadius: 5
         }
       ]
     },

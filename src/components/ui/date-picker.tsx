@@ -1,4 +1,4 @@
-import { splitProps } from "solid-js"
+import { Show, splitProps } from "solid-js"
 
 import { DatePicker as DatePickerPrimitive } from "@ark-ui/solid"
 
@@ -91,7 +91,7 @@ const DatePickerPrevTrigger = (props: DatePickerPrimitive.PrevTriggerProps) => {
       )}
       {...others}
     >
-      {local.children ?? (
+      <Show when={local.children}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -105,7 +105,7 @@ const DatePickerPrevTrigger = (props: DatePickerPrimitive.PrevTriggerProps) => {
           <path d="M15 6l-6 6l6 6" />
           <title>Previous</title>
         </svg>
-      )}
+      </Show>
     </DatePickerPrimitive.PrevTrigger>
   )
 }
@@ -123,7 +123,7 @@ const DatePickerNextTrigger = (props: DatePickerPrimitive.NextTriggerProps) => {
       )}
       {...others}
     >
-      {local.children ?? (
+      <Show when={local.children}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -137,7 +137,7 @@ const DatePickerNextTrigger = (props: DatePickerPrimitive.NextTriggerProps) => {
           <path d="M9 6l6 6l-6 6" />
           <title>Next</title>
         </svg>
-      )}
+      </Show>
     </DatePickerPrimitive.NextTrigger>
   )
 }

@@ -38,6 +38,9 @@ dependencies:
   '@solidjs/start':
     specifier: ^1.0.10
     version: 1.0.10(solid-js@1.9.3)(vinxi@0.4.3)(vite@5.4.8)
+  '@tanstack/solid-table':
+    specifier: ^8.20.5
+    version: 8.20.5(solid-js@1.9.3)
   autoprefixer:
     specifier: ^10.4.20
     version: 10.4.20(postcss@8.4.47)
@@ -2768,6 +2771,21 @@ packages:
     resolution: {integrity: sha512-UoKGxQ3r5kYI9dALKJapMmuK+1zWM/H17Z1+iwnNmzcJRnfFuevZs375TA5rW31pu4BS4NoSy1fRsexDXfWn5w==}
     dependencies:
       tslib: 2.7.0
+    dev: false
+
+  /@tanstack/solid-table@8.20.5(solid-js@1.9.3):
+    resolution: {integrity: sha512-LsB/g/24CjBpccOcok+u+tfyqtU9SIQg5wf7ne54jRdEsy5YQnrpb5ATWZileHBduIG0p/1oE7UOA+DyjtnbDQ==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      solid-js: '>=1.3'
+    dependencies:
+      '@tanstack/table-core': 8.20.5
+      solid-js: 1.9.3
+    dev: false
+
+  /@tanstack/table-core@8.20.5:
+    resolution: {integrity: sha512-P9dF7XbibHph2PFRz8gfBKEXEY/HJPOhym8CHmjF8y3q5mWpKx9xtZapXQUWCgkqvsK0R46Azuz+VaxD4Xl+Tg==}
+    engines: {node: '>=12'}
     dev: false
 
   /@tybys/wasm-util@0.9.0:

@@ -9,7 +9,7 @@ import { cn } from "~/lib/utils"
 const calloutVariants = cva("rounded-md border-l-4 p-2 pl-4", {
   variants: {
     variant: {
-      default: "border-info-foreground bg-blue-50 bg-info text-info-foreground",
+      default: "border-info-foreground bg-info text-info-foreground",
       success: "border-success-foreground bg-success text-success-foreground",
       warning: "border-warning-foreground bg-warning text-warning-foreground",
       error: "border-error-foreground bg-error text-error-foreground"

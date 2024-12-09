@@ -23,6 +23,7 @@
     "@solid-primitives/refs": "^1.0.8",
     "@solidjs/router": "^0.15.0",
     "@solidjs/start": "^1.0.10",
+    "@tanstack/solid-table": "^8.20.5",
     "autoprefixer": "^10.4.20",
     "chart.js": "^4.4.6",
     "class-variance-authority": "^0.7.0",
